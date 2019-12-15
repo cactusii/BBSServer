@@ -1,0 +1,19 @@
+mysqlclient
+pip3 install pymysql
+
+将django.db.backend.mysql.base.py的第36行注释掉然后pass
+将django.db.backend.mysql.operation.py的第146行中的decode改encode
+
+在HBUBBSServer下的__init__.py中添加
+import pymysql
+pymysql.install_as_MySQLdb()
+
+执行python manage.py inspectdb将生成的代码粘贴到app下的models.py
+
+测试数据库查询数据
+python manage.py shell进入python shell
+from BBSServer.models import User
+# BBSServer是app的名字，数据库中有张User表
+User.objects.all()
+
+#安装pip install Pillow
